@@ -1,0 +1,87 @@
+name: NaroViewer
+configs:
+  Debug: debug
+  Adhoc: debug
+  Release: release
+configFiles:
+  Debug: Configs/Debug.xcconfig
+  Adhoc: Configs/Adhoc.xcconfig
+  Release: Configs/Release.xcconfig
+options:
+  defaultConfig: Debug
+  deploymentTarget:
+    iOS: 14.0
+  bundleIdPrefix: net.inokinn
+settingGroups:
+  MainSettings:
+    CURRENT_PROJECT_VERSION: 1.0.0
+    CODE_SIGN_STYLE: Manual
+    SWIFT_VERSION: 5.0
+    DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC: YES #Read: https://forums.swift.org/t/adding-a-package-to-two-targets-in-one-projects-results-in-an-error/35007
+packages:
+    Alamofire:
+      url: https://github.com/Alamofire/Alamofire.git
+      version: 5.4.1
+    Swinject:
+      url: https://github.com/Swinject/Swinject.git
+      version: 2.7.1
+
+targets:
+  NaroViewer:
+    type: application
+    platform: iOS
+    sources: 
+      - NaroViewer
+    settings:
+      groups: [MainSettings]
+    dependencies:
+    - target: Domain
+    - target: Presentation
+    - target: Infrastructure
+    - package: Swinject
+
+  Domain:
+    type: framework
+    platform: iOS
+    sources: [Domain]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: net.inokinn.NaroViewer.Domain
+      CODE_SIGN_STYLE: Automatic
+
+  Presentation:
+    type: framework
+    platform: iOS
+    sources: [Presentation]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: net.inokinn.NaroViewer.Presentation
+      CODE_SIGN_STYLE: Automatic
+    dependencies:
+      - target: Domain
+      - target: Infrastructure
+
+  Infrastructure:
+    type: framework
+    platform: iOS
+    sources: [Infrastructure]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: net.inokinn.NaroViewer.Infrastructure
+      CODE_SIGN_STYLE: Automatic
+    dependencies:
+      - target: Domain
+      - package: Alamofire
+
+  NaroViewerTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - NaroViewerTests
+    dependencies:
+      - target: NaroViewer
+
+  NaroViewerUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - NaroViewerUITests
+    dependencies:
+      - target: NaroViewer

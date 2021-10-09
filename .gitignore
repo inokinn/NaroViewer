@@ -30,6 +30,12 @@ DerivedData/
 *.dSYM.zip
 *.dSYM
 
+## Xcode Project
+*.xcodeproj/*
+*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
@@ -88,3 +94,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+#others
+.DS_Store
