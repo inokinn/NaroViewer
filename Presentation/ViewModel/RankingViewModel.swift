@@ -11,7 +11,7 @@ import Combine
 final class RankingViewModel: ObservableObject, Identifiable {
     
     @Published var ranking: Ranking = Ranking(rowList: [])
-    var loading: Bool = false
+    @Published var loading: Bool = false
     
     private var disposables = Set<AnyCancellable>()
     
@@ -22,14 +22,13 @@ final class RankingViewModel: ObservableObject, Identifiable {
         AppBuilder.shared.rankingUseCase.startFetch(type: type)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
+                self.loading = false
                 switch completion {
                 case .finished:
                     print("成功")
-                    self.loading = false
                 case .failure(let error):
                     print("エラー")
                     print(error)
-                    self.loading = false
                 }
             },
             receiveValue: { [weak self] ranking in

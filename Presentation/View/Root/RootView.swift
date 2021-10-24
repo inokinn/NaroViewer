@@ -9,29 +9,39 @@ import SwiftUI
 
 struct RootView: View {
     let rankingView: RankingView
+    let searchView: SearchView
     
     var body: some View {
-        TabView {
-            rankingView
-                .tabItem {
-                    VStack {
-                        Image(systemName: "crown")
-                        Text("ランキング")
+        ZStack {
+            TabView {
+                rankingView
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "crown")
+                            Text("ランキング")
+                        }
                     }
-                }
-            Text("検索画面")
-                .tabItem {
-                    VStack {
-                        Image(systemName: "magnifyingglass")
-                        Text("検索")
+                searchView
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "magnifyingglass")
+                            Text("検索")
+                        }
                     }
-                }
+            }
+            
+            
+            
+            if rankingView.viewModel.loading {
+                LoadingIndicatorView()
+            }
         }
     }
 }
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView(rankingView: RankingView(viewModel: RankingViewModel()))
+        RootView(rankingView: RankingView(viewModel: RankingViewModel()),
+                 searchView: SearchView(viewModel: SearchViewModel()))
     }
 }

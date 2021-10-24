@@ -13,7 +13,8 @@ struct NaroViewerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView(rankingView: RankingView(viewModel: RankingViewModel()))
+            RootView(rankingView: RankingView(viewModel: RankingViewModel()),
+                     searchView: SearchView(viewModel: SearchViewModel()))
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

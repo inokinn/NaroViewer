@@ -44,7 +44,6 @@ final class RankingGateway: RankingGatewayProtocol {
             // 火曜日を特定した後、 "yyyyMMdd-w" の形に変換
             var targerDay = Date()
             while weekDayFormatter.string(from: targerDay) != "火" {
-                print(weekDayFormatter.string(from: targerDay))
                 targerDay = Calendar.current.date(byAdding: .day, value: -1, to: targerDay)!
             }
             
