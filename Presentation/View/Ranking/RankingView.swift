@@ -26,16 +26,27 @@ struct RankingView: View {
                     .onChange(of: rankingType) { tag in
                         self.loadRanking()
                     }
-                    .onAppear {
-                        if viewModel.ranking.rowList.count == 0 {
-                            self.loadRanking()
-                        }
-                    }
                     
                     List {
                         if viewModel.ranking.rowList.count > 0 {
                             ForEach(0..<viewModel.ranking.rowList.count) { num in
                                 RankingRowView(rankingRow: viewModel.ranking.rowList[num])
+                            }
+                        }
+                        else {
+                            if viewModel.loading {
+                                VStack {
+                                    Spacer()
+                                    Text("読み込み中…")
+                                    Spacer()
+                                }
+                            }
+                            else {
+                                VStack {
+                                    Spacer()
+                                    Text("データの取得に失敗しました")
+                                    Spacer()
+                                }
                             }
                         }
                     }
@@ -49,6 +60,11 @@ struct RankingView: View {
                             Image(systemName: "arrow.clockwise")
                         }
                     )
+            }
+            .onAppear {
+                if viewModel.ranking.rowList.count == 0 {
+                    self.loadRanking()
+                }
             }
             
             if self.viewModel.loading {

@@ -33,7 +33,7 @@ struct RankingRowView: View {
                 }
             }
             Image(systemName: "chevron.right")
-                .padding(.trailing, 8)
+                .padding(.trailing, 4)
         }
     }
 }

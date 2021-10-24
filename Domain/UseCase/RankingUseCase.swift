@@ -10,14 +10,9 @@ import Foundation
 
 /// RankingUseCase が外部に公開するインターフェイス
 protocol RankingUseCaseProtocol: AnyObject {
-    // 期間・offsetに応じたランキング取得
+    // 期間に応じたランキング取得
     func startFetch(type: Ranking.RankingType) -> AnyPublisher<Ranking, Error>
 }
-
-///// RankingUseCase の Output
-//protocol RankingUseCaseOutput {
-//    // TODO (Combineを使うので要らないかも)
-//}
 
 /// ランキング取得のためのインターフェイスアダプター
 protocol RankingGatewayProtocol {
