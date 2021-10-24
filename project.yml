@@ -30,44 +30,15 @@ targets:
   NaroViewer:
     type: application
     platform: iOS
-    sources: 
+    sources:
       - NaroViewer
+      - Domain
+      - Presentation
+      - Infrastructure
     settings:
       groups: [MainSettings]
     dependencies:
-    - target: Domain
-    - target: Presentation
-    - target: Infrastructure
-    - package: Swinject
-
-  Domain:
-    type: framework
-    platform: iOS
-    sources: [Domain]
-    settings:
-      PRODUCT_BUNDLE_IDENTIFIER: net.inokinn.NaroViewer.Domain
-      CODE_SIGN_STYLE: Automatic
-
-  Presentation:
-    type: framework
-    platform: iOS
-    sources: [Presentation]
-    settings:
-      PRODUCT_BUNDLE_IDENTIFIER: net.inokinn.NaroViewer.Presentation
-      CODE_SIGN_STYLE: Automatic
-    dependencies:
-      - target: Domain
-      - target: Infrastructure
-
-  Infrastructure:
-    type: framework
-    platform: iOS
-    sources: [Infrastructure]
-    settings:
-      PRODUCT_BUNDLE_IDENTIFIER: net.inokinn.NaroViewer.Infrastructure
-      CODE_SIGN_STYLE: Automatic
-    dependencies:
-      - target: Domain
+      - package: Swinject
       - package: Alamofire
 
   NaroViewerTests:
