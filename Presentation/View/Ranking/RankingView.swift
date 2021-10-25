@@ -29,8 +29,11 @@ struct RankingView: View {
                     
                     List {
                         if viewModel.ranking.rowList.count > 0 {
-                            ForEach(0..<viewModel.ranking.rowList.count) { num in
-                                RankingRowView(rankingRow: viewModel.ranking.rowList[num])
+                            ForEach(viewModel.ranking.rowList, id: \.ncode) { row in
+                                //RankingRowView(rankingRow: row)
+                                NavigationLink(destination: WebView(targetUrlString: "https://ncode.syosetu.com/" + row.ncode + "/")) {
+                                    RankingRowView(rankingRow: row)
+                                }
                             }
                         }
                         else {
@@ -61,6 +64,7 @@ struct RankingView: View {
                         }
                     )
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .onAppear {
                 if viewModel.ranking.rowList.count == 0 {
                     self.loadRanking()

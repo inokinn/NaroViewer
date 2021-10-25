@@ -10,7 +10,7 @@ configFiles:
 options:
   defaultConfig: Debug
   deploymentTarget:
-    iOS: 14.0
+    iOS: 15.0
   bundleIdPrefix: net.inokinn
 settingGroups:
   MainSettings:

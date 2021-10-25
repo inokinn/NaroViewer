@@ -15,33 +15,23 @@ struct SearchView: View {
         ZStack {
             NavigationView {
                 VStack {
-                    HStack {
-                        TextField("検索ワードを入力してね", text: $searchWord)
-                        Button(action: {
-                            self.loadSearch()
-                        }) {
-                            Image(systemName: "arrow.turn.down.left")
-                        }
+                    SearchBar(text: $searchWord) {
+                        self.loadSearch()
                     }
                     List {
                         if viewModel.searchResults.count > 0 {
-                            ForEach(0..<viewModel.searchResults.count) { num in
-                                SearchRowView(searchNovelRow: viewModel.searchResults[num])
+                            ForEach(viewModel.searchResults, id: \.ncode) { result in
+                                NavigationLink(destination: WebView(targetUrlString: "https://ncode.syosetu.com/" + result.ncode + "/")) {
+                                    SearchRowView(searchNovelRow: result)
+                                }
                             }
                         }
                     }
                     .listStyle(PlainListStyle())
                 }
-                
                 .navigationBarTitle(Text("検索"), displayMode: .inline)
-                    .navigationBarItems(
-                        trailing: Button(action: {
-                            self.loadSearch()
-                        }) {
-                            Image(systemName: "arrow.clockwise")
-                        }
-                    )
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             
             if self.viewModel.loading {
                 LoadingIndicatorView()

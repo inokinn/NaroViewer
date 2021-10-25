@@ -15,15 +15,16 @@ struct SearchRowView: View {
             VStack(alignment: .leading) {
                 Text(searchNovelRow.title)
                     .lineLimit(2)
-                    .font(.body)
+                    .font(.caption)
+                    .foregroundColor(.orange)
                     .padding(.top, 4)
                 Spacer()
                 HStack {
                     Text("作者:")
-                        .font(.caption)
+                        .font(.caption2)
                         .padding(.bottom, 4)
                     Text(searchNovelRow.writer)
-                        .font(.caption)
+                        .font(.caption2)
                         .padding(.bottom, 4)
                     Spacer()
                 }
@@ -33,20 +34,20 @@ struct SearchRowView: View {
                 Spacer()
                 HStack {
                     Text("最終更新日: " + self.stringFromDate(date: searchNovelRow.generalLastup))
-                        .font(.caption)
+                        .font(.caption2)
                         .padding(.bottom, 4)
                     Text("レビュー数: " + String(searchNovelRow.reviewCnt))
-                        .font(.caption)
+                        .font(.caption2)
                         .padding(.bottom, 4)
                 }
                 HStack {
                     VStack {
                         Text("総合pt")
-                            .font(.caption)
+                            .font(.caption2)
                             .bold()
                             .foregroundColor(.red)
                         Text(String(searchNovelRow.globalPoint) + "pt")
-                            .font(.caption)
+                            .font(.caption2)
                             .bold()
                             .padding(.bottom, 4)
                             .foregroundColor(.red)
@@ -54,32 +55,29 @@ struct SearchRowView: View {
                     Spacer()
                     VStack {
                         Text("ブックマーク")
-                            .font(.caption)
+                            .font(.caption2)
                         Text(String(searchNovelRow.favNovelCnt) + "件")
-                            .font(.caption)
+                            .font(.caption2)
                             .padding(.bottom, 4)
                     }
                     Spacer()
                     VStack {
                         Text("評価人数")
-                            .font(.caption)
+                            .font(.caption2)
                         Text(String(searchNovelRow.allHyokaCnt) + "人")
-                            .font(.caption)
+                            .font(.caption2)
                             .padding(.bottom, 4)
                     }
                     Spacer()
                     VStack {
                         Text("評価pt")
-                            .font(.caption)
+                            .font(.caption2)
                         Text(String(searchNovelRow.allPoint) + "pt")
-                            .font(.caption)
+                            .font(.caption2)
                             .padding(.bottom, 4)
                     }
                 }
-                
             }
-            Image(systemName: "chevron.right")
-                .padding(.trailing, 4)
         }
     }
     

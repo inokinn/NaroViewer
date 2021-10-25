@@ -24,11 +24,10 @@ final class RankingViewModel: ObservableObject, Identifiable {
             .sink(receiveCompletion: { completion in
                 self.loading = false
                 switch completion {
-                case .finished:
-                    print("成功")
-                case .failure(let error):
-                    print("エラー")
-                    print(error)
+                case .finished: break
+                case .failure(_):
+                    // TODO: エラーハンドリング
+                    break
                 }
             },
             receiveValue: { [weak self] ranking in

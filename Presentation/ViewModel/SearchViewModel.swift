@@ -22,14 +22,12 @@ final class SearchViewModel: ObservableObject, Identifiable {
         AppBuilder.shared.searchNovelUseCase.startSearch(word: word)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
+                self.loading = false
                 switch completion {
-                case .finished:
-                    print("検索成功")
-                    self.loading = false
+                case .finished: break
                 case .failure(let error):
-                    print("検索エラー")
-                    print(error)
-                    self.loading = false
+                    // TODO: エラーハンドリング
+                    break
                 }
             },
             receiveValue: { [weak self] results in

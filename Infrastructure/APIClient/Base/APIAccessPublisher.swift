@@ -21,7 +21,6 @@ struct APIAccessPublisher {
     static func publish<T, V>(_ request: T) -> Future<V, Error>
     where T: BaseRequest, V: Codable, T.ResponseType == V {
         return Future { promise in
-            print(request.parameters)
             let api = AF
                 .request(request)
                 .responseJSON { response in
