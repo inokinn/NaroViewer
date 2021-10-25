@@ -38,7 +38,7 @@ final class RankingGateway: RankingGatewayProtocol {
         switch type {
         case .Daily:
             // "yyyyMMdd-d" の形に変換
-            rtype = dateFormatter.string(from: Date()) + "-d"
+            rtype = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: -1, to: Date())!) + "-d"
             break
         case .Weekly:
             // 火曜日を特定した後、 "yyyyMMdd-w" の形に変換
@@ -58,7 +58,6 @@ final class RankingGateway: RankingGatewayProtocol {
             rtype = dateFormatter.string(from: firstDay) + "-q"
             break
         }
-        print(rtype)
         
         // レスポンスを Entity に変換し UseCase に返す
         return apiClient.fetch(rtype: rtype)

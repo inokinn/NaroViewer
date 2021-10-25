@@ -13,27 +13,25 @@ struct RankingRowView: View {
     var body: some View {
         HStack {
             Text(String(rankingRow.rank))
-                .font(.title)
+                .font(.title2)
                 .italic()
                 .frame(width: 52, height: 48, alignment: .trailing)
             VStack(alignment: .leading) {
                 Text(rankingRow.novel!.title)
                     .lineLimit(2)
-                    .font(.body)
+                    .font(.caption)
                     .padding(.top, 4)
                 Spacer()
                 HStack {
                     Text("作者:")
-                        .font(.caption)
+                        .font(.caption2)
                         .padding(.bottom, 4)
                     Text(rankingRow.novel!.writer)
-                        .font(.caption)
+                        .font(.caption2)
                         .padding(.bottom, 4)
                     Spacer()
                 }
             }
-            Image(systemName: "chevron.right")
-                .padding(.trailing, 4)
         }
     }
 }
